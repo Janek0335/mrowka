@@ -33,9 +33,9 @@ void printToScreen(Matrix *mat) {
 	for (i = 0; i<mat->r; i++) {
 		printf("  ");
 		for (j = 0; j < mat->c; j++) {
-			printf("%f ", mat->data[i][j]);
+			printf("%d ", mat->data[i][j]);
 		}
-		printf("; \n");
+		printf("\n");
 	}
 	printf("]\n");
 }
@@ -46,9 +46,9 @@ Matrix * createMatrix(int r, int c) {
 		if (mat != NULL) {
 			mat->r = r;
 			mat->c = c;
-			mat->data = (double**) malloc(sizeof(double*) * r);
+			mat->data = (int**) malloc(sizeof(int*) * r);
 			for (i=0; i < r; i++) {
-					mat->data[i] = (double*) malloc(sizeof(double) * c);
+					mat->data[i] = (int*) malloc(sizeof(int) * c);
 			}
 		}
 
@@ -61,5 +61,13 @@ void freeMatrix(Matrix * mat) {
 		free(mat->data[i]);
 	free(mat->data);
 	free(mat);
+}
+
+void fillBlankMatrix(Matrix * mat){
+	for (int i = 0; i < mat->r; i++){
+		for (int j = 0; j < mat->c; j++){
+			mat->data[i][j] = 0;
+		}
+	}
 }
 

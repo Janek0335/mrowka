@@ -3,7 +3,7 @@
 
 typedef struct _Matrix {
 				int r,c;
-				double **data;
+				int **data;
 } Matrix;
 
 Matrix * readFromFile(char * fname);
@@ -11,5 +11,5 @@ void printToScreen(Matrix *mat);
 
 Matrix * createMatrix(int r, int c);
 void freeMatrix(Matrix *mat);
-
+void fillBlankMatrix(Matrix * mat);
 #endif
