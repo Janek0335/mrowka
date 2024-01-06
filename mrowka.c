@@ -11,13 +11,13 @@ mrowka * stworzMrowke(int zwrot, int pozX, int pozY){
     return mrowka1;
 }
 
-void iteracjaMrowki(mrowka* mrowka1, Matrix *mat, int pozX, int pozY){
-    if (mat->data[pozX][pozY] == 0){
-        mat->data[pozX][pozY] = 1;
+void zmienKolor(mrowka* mrowka1, Matrix *mat){
+    if (mat->data[mrowka1->pozX][mrowka1->pozY] == 0){
+        mat->data[mrowka1->pozX][mrowka1->pozY] = 1;
         mrowka1->zwrot += 90;
     }
-    else if (mat->data[pozX][pozY] == 1){
-        mat->data[pozX][pozY] = 0;
+    else if (mat->data[mrowka1->pozX][mrowka1->pozY] == 1){
+        mat->data[mrowka1->pozX][mrowka1->pozY] = 0;
         mrowka1->zwrot -= 90;
     }
 }
@@ -52,4 +52,8 @@ int czyKoniec (mrowka *mrowka1, Matrix *mat){
         koniec = 1;
     }
     return koniec;
+}
+
+void freeMrowka(mrowka*mrowka1){
+    free(mrowka1);
 }
