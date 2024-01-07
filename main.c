@@ -22,7 +22,7 @@ int main(int argc, char **argv){
     ruchDoPrzoduMrowki(mrowka1);
     i++;
     if (czyKoniec(mrowka1, plansza) == 1){
-      return 0;
+      break;
     }
     printf("Konczymy? : %d\n",czyKoniec(mrowka1, plansza));
   }

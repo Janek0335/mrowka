@@ -23,7 +23,7 @@ void zmienKolor(mrowka* mrowka1, Matrix *mat){
 }
 
 void normalizacjaKataMrowki(mrowka *mrowka1){
-    if (mrowka1->zwrot < 360){
+    if (mrowka1->zwrot < 0){
         mrowka1->zwrot += 360;
         mrowka1->zwrot %= 360;
     }
