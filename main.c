@@ -14,7 +14,7 @@ int main(int argc, char **argv){
   printToScreen(plansza);
   mrowka *mrowka1 = stworzMrowke(0,collumns/2,rows/2);
   
-  while (i < iteracji){
+  while (i < iteracji){ //wykonujemy iteracje tak dlugo az zostana wykonane wszystkie lub wyjdziemy za plansze (if czyKoniec to sprawdza)
     printf("Iteracja numer %d\n",i);
     zmienKolor(mrowka1,plansza); //tu jest najwyrazniej pierwsza komenda ktora nie jest wykonywana
     printf("Ziterowano mrowke\n");

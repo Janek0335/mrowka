@@ -1,5 +1,5 @@
 #include "matrix.h"
-typedef struct _Mrowka {
+typedef struct _Mrowka { //mrowka ma swoj zwrot (0,90,180,270), pozycja w osi X i Y na dwuwymiarowej mapie
 				int zwrot;
 				int pozX;
                 int pozY;
