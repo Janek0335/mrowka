@@ -4,7 +4,7 @@
 #include "matrix.h"
 
 mrowka * stworzMrowke(int zwrot, int pozX, int pozY){ //alokacja miejsca na mrowke wraz z poczatkowymi parametrami
-    mrowka * mrowka1 = (mrowka*) malloc(sizeof(mrowka));
+    mrowka *mrowka1 = malloc(sizeof(mrowka*));
 		if (mrowka1 == NULL) {
             fprintf(stderr, "Nie udalo sie zaalokowac pamieci na mrowke\n");
             return 1;
@@ -13,6 +13,7 @@ mrowka * stworzMrowke(int zwrot, int pozX, int pozY){ //alokacja miejsca na mrow
 }
 
 void zmienKolor(mrowka* mrowka1, Matrix *mat){ //wykonanie manewru zmiany koloru miejsca na ktorym stoi mrowka
+    fprintf(stderr, "Zmienilxm kolor");
     if (mat->data[mrowka1->pozX][mrowka1->pozY] == 0){
         mat->data[mrowka1->pozX][mrowka1->pozY] = 1;
         mrowka1->zwrot += 90;
