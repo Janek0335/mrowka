@@ -5,9 +5,9 @@
 // zera to biale pola, jedynki to czarne
 int main(int argc, char **argv){
   int i = 0;
-  int rows = atoi(argv[1]);
-  int collumns = atoi(argv[2]);
-  int iteracji = atoi(argv[3]);
+  int rows = argc > 1 ? atoi(argv[1]) : 5;
+  int collumns = argc > 2 ? atoi(argv[2]) : 5;
+  int iteracji = argc > 3 ? atoi(argv[3]) : 5;
   Matrix *plansza = createMatrix(rows,collumns);
   fillBlankMatrix(plansza);
   printf("Oryginalna plansza:\n");
