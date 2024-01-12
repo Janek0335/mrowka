@@ -9,6 +9,7 @@ int main(int argc, char **argv){
   int collumns = argc > 2 ? atoi(argv[2]) : 5;
   int iteracji = argc > 3 ? atoi(argv[3]) : 5;
   char* filen = "test";
+  char nazwaPliku[100];
   FILE *fname;
   fprintf(stderr, "poczatek");
   Matrix *plansza = createMatrix(rows,collumns);
@@ -26,9 +27,9 @@ int main(int argc, char **argv){
     ruchDoPrzoduMrowki(mrowka1);
 
     //Zapis do pliku
-    fname = fopen(("%s_%d", filen, i), "w");
-    fprintf(fname, "test%d", i); //tutaj zmiana printToScreen powinna byc, aby zwracalo najlepiej plansze a nie printy same i void
-    fclose(fname);
+    sprintf(nazwaPliku, "%s_%d", filen, i);
+    fname = fopen(nazwaPliku, "w"); //tutaj zmiana printToScreen powinna byc, aby zwracalo najlepiej plansze a nie printy same i void
+    fclose(nazwaPliku);
 
     i++;
     if (czyKoniec(mrowka1, plansza) == 1){
