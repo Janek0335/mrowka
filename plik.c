@@ -21,7 +21,7 @@ int* wyanczRozmiar(FILE *in){
     return rozmiar;
 }
 
-void wczytaj(FILE *in, int a, int b, mrowka* mrowka1, Matrix *mat){
+void wczytaj(FILE *in, int a, int b, mrowka* mrowka1, Matrix *mat){ // a to ilosc rzedow, b to ilosc kolumn wczytywanej planszy (bez obramowania)
     int znak;
     for (int i = 0; i < a; i++){
         for (int j = 0; i < b; j++){
@@ -86,9 +86,9 @@ void zapisz(FILE *out, mrowka* mrowka1, Matrix *mat){
         fprintf(out,"─");
     }
     fprintf(out, "┐");
-    for (int i = 0; i < mat->c; i++){
+    for (int i = 0; i < mat->r; i++){
         fprintf(out, "│");
-        for (int j = 0; j < mat->r; j++){
+        for (int j = 0; j < mat->c; j++){
             if (i == mrowka1->pozX && j == mrowka1->pozY){ //jesli akurat tu jest mrowka
                 switch(mrowka1->zwrot){
                     case 0:

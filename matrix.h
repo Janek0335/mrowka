@@ -12,4 +12,5 @@ void printToScreen(Matrix *mat);
 Matrix * createMatrix(int r, int c);
 void freeMatrix(Matrix *mat);
 void fillBlankMatrix(Matrix * mat);
+void fillRandom(double percentBlack, Matrix* mat);
 #endif

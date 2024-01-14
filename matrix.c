@@ -1,6 +1,7 @@
 #include "matrix.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 Matrix * readFromFile(char * fname) {
 				int r,c;
@@ -71,3 +72,22 @@ void fillBlankMatrix(Matrix * mat){
 	}
 }
 
+void fillRandom(double percentBlack, Matrix* mat){
+	if (percentBlack < 0 || percentBlack > 100){
+		printf("Szansa musi byc z zakresu od 0 do 100");
+		return NULL;
+	}
+	srand((unsigned int) time(NULL));
+	int szansa;
+	for (int i = 0; i< mat->r;){
+		for (int j = 0; j< mat->c; j++){
+			szansa = rand() % 100 + 1;
+			if (szansa <= percentBlack){
+				mat->data[i][j] = 1;
+			}
+			else {
+				mat->data[i][j] = 0;
+			}
+		}
+	}
+}
