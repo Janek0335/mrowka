@@ -12,17 +12,19 @@ int main(int argc, char **argv){
   int rows = 5;
   int collumns = 5;
   int iteracji = 5;
-  char* filen;
+  char* outputFile;
   int doFile = 0;
+  double fillRatio = 0;
   char nazwaPliku[100];
+  char *fileWithMap;
   FILE *fname;
   
-  while((opt = getopt(argc, argv, ":r:c:i:f:")) != -1){
+  while((opt = getopt(argc, argv, ":r:c:i:f:hw:o:")) != -1){
     switch (opt)
     {
-      case 'f':
+      case 'o':
         doFile = 1;
-        filen = optarg;
+        outputFile = optarg;
         break;
       case 'r':
         rows = atoi(optarg);
@@ -33,8 +35,17 @@ int main(int argc, char **argv){
       case 'i':
         iteracji = atoi(optarg);
         break;
+      case 'w':
+        fillRatio = atof(optarg);
+        break;
+      case 'f':
+        fileWithMap = optarg;
+        break;
+      case 'h':
+        //show help
+        break;
       case '?':
-        printf("Nieznana opcja: %c\n", optopt);
+        printf("Nieznana opcja: %c\t Zajrzyj do help -h\n", optopt);
         break;
       case ':':
         printf("Brak wartosci do opcji");
@@ -49,7 +60,6 @@ int main(int argc, char **argv){
   printf("Oryginalna plansza:\n");
   printToScreen(plansza);
   mrowka *mrowka1 = stworzMrowke(0,collumns/2,rows/2);
-  fprintf(stderr, "stworzylxm mrowke");
   while (i < iteracji){ //wykonujemy iteracje tak dlugo az zostana wykonane wszystkie lub wyjdziemy za plansze (if czyKoniec to sprawdza)
     printf("Iteracja numer %d\n",i);
     zmienKolor(mrowka1,plansza); //faktycznie
@@ -58,10 +68,10 @@ int main(int argc, char **argv){
     normalizacjaKataMrowki(mrowka1);
     ruchDoPrzoduMrowki(mrowka1);
   
-    //Zapis do pliku
+    //Zapis do pliku tu dolozyc
     if(doFile){
-      sprintf(nazwaPliku, "%s_%d", filen, i);
-      fname = fopen(nazwaPliku, "w"); //tutaj zmiana printToScreen powinna byc, aby zwracalo najlepiej plansze a nie printy same i void
+      sprintf(nazwaPliku, "%s_%d", outputFile, i);
+      fname = fopen(nazwaPliku, "w");
       fclose(fname);
     }
 
