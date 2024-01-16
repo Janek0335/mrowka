@@ -7,7 +7,7 @@ mrowka * stworzMrowke(int zwrot, int pozX, int pozY){ //alokacja miejsca na mrow
     mrowka *mrowka1 = malloc(sizeof(mrowka*));
 		if (mrowka1 == NULL) {
             fprintf(stderr, "Nie udalo sie zaalokowac pamieci na mrowke\n");
-            return 1;
+            return NULL;
         }
     return mrowka1;
 }

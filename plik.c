@@ -30,7 +30,7 @@ void wczytaj(FILE *in, int a, int b, mrowka* mrowka1, Matrix *mat){ // a to ilos
                 case ' ':
                     mat->data[i][j] = 0;
                 case '█':
-                    mat->data = 1;
+                    mat->data[i][j] = 1;
                 case '△':
                     mat->data[i][j] = 0;
                     mrowka1->pozX = i;

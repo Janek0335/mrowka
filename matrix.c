@@ -74,8 +74,8 @@ void fillBlankMatrix(Matrix * mat){
 
 void fillRandom(double percentBlack, Matrix* mat){
 	if (percentBlack < 0 || percentBlack > 100){
-		printf("Szansa musi byc z zakresu od 0 do 100");
-		return NULL;
+		printf("Szansa musi byc z zakresu od 0 do 100, nie wykonano zadnej akcji");
+		return;
 	}
 	srand((unsigned int) time(NULL));
 	int szansa;
