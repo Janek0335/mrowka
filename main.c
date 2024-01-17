@@ -42,7 +42,15 @@ int main(int argc, char **argv){
         fileWithMap = optarg;
         break;
       case 'h':
-        //show help
+          printf("Wywolanie programu:\n./ mrowka[-r wiersze][-c kolumny][-i iteracje][-w % zapelnienia][-f nazwaPlikuWejsciowego][-o nazwaPlikuWyjsciowego][-h]\nOpcje:\n");
+          printf("r - rows / liczba wierszy\n");
+          printf("c - columns/ liczba kolumn\n");
+          printf("i - iterations/ liczba iteracji\n");
+          printf("f - fileWithMap / nazwa pliku wejsciowego z mapa\n");
+          printf("h - help/ wyswietlana pomoc\n");
+          printf("w - fillRatio/ wypelnienie planszy\n");
+          printf("o - outputFile / plik wyjsciowy do zapisu\n");
+            
         break;
       case '?':
         printf("Nieznana opcja: %c\t Zajrzyj do help -h\n", optopt);
