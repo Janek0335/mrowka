@@ -4,3 +4,5 @@
 
 int* wyznaczRozmiar(FILE*);
 void zapisz(FILE*, mrowka*, Matrix*);
+void wczytaj(FILE* , int , int , mrowka* , Matrix*);
+

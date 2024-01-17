@@ -2,7 +2,7 @@ CC:=gcc
 
 all: mrowka
 
-mrowka: main.c matrix.c mrowka.c
+mrowka: main.c matrix.c mrowka.c plik.c
 	$(CC) $(CFLAGS) -o $@ $^
 
 clean:
