@@ -1,3 +1,6 @@
+#ifndef _MROWKA_H
+#define _MROWKA_H
+
 #include "matrix.h"
 typedef struct _Mrowka { //mrowka ma swoj zwrot (0,90,180,270), pozycja w osi X i Y na dwuwymiarowej mapie
 				int zwrot;
@@ -11,3 +14,5 @@ void normalizacjaKataMrowki(mrowka *mrowka1);
 void ruchDoPrzoduMrowki(mrowka *mrowka1);
 int czyKoniec (mrowka *mrowka1, Matrix *mat);
 void freeMrowka(mrowka *mrowka1);
+
+#endif
