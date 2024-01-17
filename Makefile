@@ -1,4 +1,4 @@
-CC:=cc
+CC:=gcc
 
 all: mrowka
 

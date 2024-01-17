@@ -4,6 +4,7 @@
 #include <getopt.h>
 #include "matrix.h"
 #include "mrowka.h"
+#include "plik.h"
 
 // zera to biale pola, jedynki to czarne
 int main(int argc, char **argv){

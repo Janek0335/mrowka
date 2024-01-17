@@ -2,5 +2,5 @@
 #include "mrowka.h"
 #include <stdio.h>
 
-int* wyanczRozmiar(FILE*);
+int* wyznaczRozmiar(FILE*);
 void zapisz(FILE*, mrowka*, Matrix*);

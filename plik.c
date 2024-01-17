@@ -3,7 +3,7 @@
 #include "matrix.h"
 #include "mrowka.h"
 
-int* wyanczRozmiar(FILE *in){
+int* wyznaczRozmiar(FILE *in){
     int znak;
     int a = 0;
     int b = 1;
