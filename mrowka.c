@@ -9,11 +9,12 @@ mrowka * stworzMrowke(int zwrot, int pozX, int pozY){ //alokacja miejsca na mrow
             fprintf(stderr, "Nie udalo sie zaalokowac pamieci na mrowke\n");
             return NULL;
         }
+    mrowka1->pozX = pozX;
+    mrowka1->pozY = pozY;
     return mrowka1;
 }
 
 void zmienKolor(mrowka* mrowka1, Matrix *mat){ //wykonanie manewru zmiany koloru miejsca na ktorym stoi mrowka
-    fprintf(stderr, "Zmienilxm kolor");
     if (mat->data[mrowka1->pozX][mrowka1->pozY] == 0){
         mat->data[mrowka1->pozX][mrowka1->pozY] = 1;
         mrowka1->zwrot += 90;
@@ -38,12 +39,16 @@ void ruchDoPrzoduMrowki(mrowka *mrowka1){ //wykonanie ruchu mrowki przed siebie 
     switch(mrowka1->zwrot){
         case 0:
             mrowka1->pozY += 1;
+            break;
         case 90:
             mrowka1->pozX += 1;
+            break;
         case 180:
             mrowka1->pozY -= 1;
+            break;
         case 270:
             mrowka1->pozX -= 1;
+            break;
     }
 }
 

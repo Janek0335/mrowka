@@ -69,9 +69,10 @@ int main(int argc, char **argv){
   printf("Oryginalna plansza:\n");
   printToScreen(plansza);
   mrowka *mrowka1 = stworzMrowke(0,collumns/2,rows/2);
+  
   while (i < iteracji){ //wykonujemy iteracje tak dlugo az zostana wykonane wszystkie lub wyjdziemy za plansze (if czyKoniec to sprawdza)
     printf("Iteracja numer %d\n",i);
-    zmienKolor(mrowka1,plansza); //faktycznie
+    zmienKolor(mrowka1,plansza);
     printf("Ziterowano mrowke\n");
     
     normalizacjaKataMrowki(mrowka1);
@@ -83,7 +84,6 @@ int main(int argc, char **argv){
       fname = fopen(nazwaPliku, "w");
       fclose(fname);
     }
-
     i++;
     if (czyKoniec(mrowka1, plansza) == 1){
       break;

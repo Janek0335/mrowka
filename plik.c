@@ -29,48 +29,58 @@ void wczytaj(FILE *in, int a, int b, mrowka* mrowka1, Matrix *mat){ // a to ilos
             switch(znak){
                 case ' ':
                     mat->data[i][j] = 0;
+                    break;
                 case '█':
                     mat->data[i][j] = 1;
+                    break;
                 case '△':
                     mat->data[i][j] = 0;
                     mrowka1->pozX = i;
                     mrowka1->pozY = j;
                     mrowka1->zwrot = 0;
+                    break;
                 case '▲':
                     mat->data[i][j] = 1;
                     mrowka1->pozX = i;
                     mrowka1->pozY = j;
                     mrowka1->zwrot = 0;
+                    break;
                 case '▷':
                     mat->data[i][j] = 0;
                     mrowka1->pozX = i;
                     mrowka1->pozY = j;
                     mrowka1->zwrot = 90;
+                    break;
                 case '▶':
                     mat->data[i][j] = 1;
                     mrowka1->pozX = i;
                     mrowka1->pozY = j;
                     mrowka1->zwrot = 90;
+                    break;
                 case '▽':
                     mat->data[i][j] = 0;
                     mrowka1->pozX = i;
                     mrowka1->pozY = j;
                     mrowka1->zwrot = 180;
+                    break;
                 case '▼':
                     mat->data[i][j] = 1;
                     mrowka1->pozX = i;
                     mrowka1->pozY = j;
                     mrowka1->zwrot = 180;
+                    break;
                 case '◁':
                     mat->data[i][j] = 0;
                     mrowka1->pozX = i;
                     mrowka1->pozY = j;
                     mrowka1->zwrot = 270;
+                    break;
                 case '◀':
                     mat->data[i][j] = 1;
                     mrowka1->pozX = i;
                     mrowka1->pozY = j;
                     mrowka1->zwrot = 270;
+                    break;
                 case EOF:
                     break;
                 default:
@@ -94,23 +104,29 @@ void zapisz(FILE *out, mrowka* mrowka1, Matrix *mat){
                     case 0:
                         if (mat->data[i][j] == 0) fprintf(out,"△");
                         else if (mat->data[i][j] == 1) fprintf(out,"▲");
+                        break;
                     case 90:
                         if (mat->data[i][j] == 0) fprintf(out,"▷");
                         else if (mat->data[i][j] == 1) fprintf(out,"▶");
+                        break;
                     case 180:
                         if (mat->data[i][j] == 0) fprintf(out,"▽");
                         else if (mat->data[i][j] == 1) fprintf(out,"▼");
+                        break;
                     case 270:
                         if (mat->data[i][j] == 0) fprintf(out,"◁");
                         else if (mat->data[i][j] == 1) fprintf(out,"◀");
+                        break;
                 }
         }
             else{
             switch(mat->data[i][j]){ //jesli tu nie ma mrowki
                 case 0:
                     fprintf(out," ");
+                    break;
                 case 1:
                     fprintf(out,"█");
+                    break;
             }
         }
     fprintf(out,"│");
