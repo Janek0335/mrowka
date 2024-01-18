@@ -30,70 +30,84 @@ void wczytaj(FILE *in, int a, int b, mrowka* mrowka1, Matrix *mat){ // a to ilos
     rewind(in);
     wchar_t buffer[1024];
     wint_t znak;
-    for (int i = 0; i < a; i++){
+    int j=0;
+    fgetws(buffer, sizeof(buffer) / sizeof(buffer[0]), in);
+    for (int i = 0; i < b; i++){
+        j=0;
         memset(buffer, 0, sizeof(buffer));
         fgetws(buffer, sizeof(buffer) / sizeof(buffer[0]), in);
-        for (int j = 0; j < b; j++){
+        while(j<a){     
             for (int pom = 0; buffer[pom] != L'\0'; ++pom) {
                 znak = buffer[pom];
-                if (znak == " "){
+                if (znak == L'└'){ 
+                        break;
+                }
+                if (znak == L' '){
                         mat->data[i][j] = 0;
+                        j++;
                 }
-                else if (znak == "█"){
+                else if (znak == L'█'){ 
                         mat->data[i][j] = 1;
+                        j++;
                 }
-                else if (znak == "△"){
+                else if (znak == L'△'){
                         mat->data[i][j] = 0;
                         mrowka1->pozX = i;
                         mrowka1->pozY = j;
                         mrowka1->zwrot = 0;
+                        j++;
                 }
-                else if (znak == "▲"){
+                else if (znak == L'▲'){
                         mat->data[i][j] = 1;
                         mrowka1->pozX = i;
                         mrowka1->pozY = j;
                         mrowka1->zwrot = 0;
+                        j++;
                 }
-                else if(znak == "▷"){
+                else if(znak == L'▷'){
                         mat->data[i][j] = 0;
                         mrowka1->pozX = i;
                         mrowka1->pozY = j;
                         mrowka1->zwrot = 90;
+                        j++;
                 }
-                else if (znak == "▶"){
+                else if (znak == L'▶'){
                         mat->data[i][j] = 1;
                         mrowka1->pozX = i;
                         mrowka1->pozY = j;
                         mrowka1->zwrot = 90;
+                        j++;
                 }
-                else if (znak == "▽"){
+                else if (znak == L'▽'){
                         mat->data[i][j] = 0;
                         mrowka1->pozX = i;
                         mrowka1->pozY = j;
                         mrowka1->zwrot = 180;
+                        j++;
                 }
-                else if (znak == "▼"){
+                else if (znak == L'▼'){
                         mat->data[i][j] = 1;
                         mrowka1->pozX = i;
                         mrowka1->pozY = j;
                         mrowka1->zwrot = 180;
+                        j++;
                 }
-                else if (znak == "◁"){
+                else if (znak == L'◁'){
                         mat->data[i][j] = 0;
                         mrowka1->pozX = i;
                         mrowka1->pozY = j;
                         mrowka1->zwrot = 270;
+                        j++;
                 }
-                else if (znak == "◀"){
+                else if (znak == L'◀'){
                         mat->data[i][j] = 1;
                         mrowka1->pozX = i;
                         mrowka1->pozY = j;
                         mrowka1->zwrot = 270;
+                        j++;
                 }
-                else{
-                        continue;
-                    }
             }
+            break;
         }
     }
 }
