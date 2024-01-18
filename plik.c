@@ -7,32 +7,37 @@
 
 int* wyznaczRozmiar(FILE *in){
     wchar_t buffer[1024];
-    int znak;
+    wint_t character;
     rewind(in);
     int a = 0;
-    int b = 1;
+    int b = 0;
     int* rozmiar = malloc(2*sizeof(int));
-    fgetws(buffer, sizeof(buffer) / sizeof(buffer[0]), in);
-    while (znak = fgetc(in) != '\n'){
-        a++;
-    }
-    while (znak = fgetc(in) != EOF){
-        if (znak == '\n'){
-            b++;
+    while(fgetws(buffer, sizeof(buffer) / sizeof(buffer[0]), in) != NULL){
+        for (int i = 0; buffer[i] != L'\0'; ++i) {
+            // Access the current wide character in the buffer
+            character = buffer[i];
+            a++;
         }
+        b++;
+        memset(buffer, 0, sizeof(buffer));
     }
-    rozmiar[0] = a-2;
+    rozmiar[0] = a/b - 2;
     rozmiar[1] = b-2;
     return rozmiar;
 }
 
 void wczytaj(FILE *in, int a, int b, mrowka* mrowka1, Matrix *mat){ // a to ilosc rzedow, b to ilosc kolumn wczytywanej planszy (bez obramowania)
     rewind(in);
-    wchar_t znak;
+    wchar_t buffer[1024];
+    wint_t znak;
     for (int i = 0; i < a; i++){
+        memset(buffer, 0, sizeof(buffer));
+        fgetws(buffer, sizeof(buffer) / sizeof(buffer[0]), in);
         for (int j = 0; j < b; j++){
-            znak = fgetwc(in);
-            wprintf(L"%lc", znak);
+            for (int pom = 0; buffer[pom] != L'\0'; ++pom) {
+                znak = buffer[pom];
+            }
+            
             switch(znak){
                 case ' ':
                     mat->data[i][j] = 0;
@@ -87,8 +92,6 @@ void wczytaj(FILE *in, int a, int b, mrowka* mrowka1, Matrix *mat){ // a to ilos
                     mrowka1->pozX = i;
                     mrowka1->pozY = j;
                     mrowka1->zwrot = 270;
-                    break;
-                case WEOF:
                     break;
                 default:
                     continue;
