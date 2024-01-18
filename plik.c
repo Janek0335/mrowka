@@ -100,7 +100,7 @@ void zapisz(FILE *out, mrowka* mrowka1, Matrix *mat){
     for (int k = 0; k < mat->c; k++){
         fprintf(out,"─");
     }
-    fprintf(out, "┐");
+    fprintf(out, "┐\n");
     for (int i = 0; i < mat->r; i++){
         fprintf(out, "│");
         for (int j = 0; j < mat->c; j++){
@@ -123,7 +123,7 @@ void zapisz(FILE *out, mrowka* mrowka1, Matrix *mat){
                         else if (mat->data[i][j] == 1) fprintf(out,"◀");
                         break;
                 }
-        }
+            }
             else{
             switch(mat->data[i][j]){ //jesli tu nie ma mrowki
                 case 0:
@@ -132,14 +132,14 @@ void zapisz(FILE *out, mrowka* mrowka1, Matrix *mat){
                 case 1:
                     fprintf(out,"█");
                     break;
+                }
             }
         }
-    fprintf(out,"│");
+        fprintf(out,"│\n");
     }
     fprintf(out,"└");
     for (int k = 0; k < mat->c; k++){
         fprintf(out,"─");
     }
     fprintf(out,"┘");
-}
 }
