@@ -20,11 +20,12 @@ int main(int argc, char **argv){
   int doFile = 0;
   int readFile = 0;
   double fillRatio = 0;
+  int axis=0;
   char nazwaPliku[100];
   char *fileWithMap;
   FILE *fname;
   
-  while((opt = getopt(argc, argv, ":r:c:i:f:hw:o:")) != -1){
+  while((opt = getopt(argc, argv, ":r:c:i:f:hw:o:z:")) != -1){
     switch (opt)
     {
       case 'o':
@@ -33,6 +34,24 @@ int main(int argc, char **argv){
         break;
       case 'r':
         rows = atoi(optarg);
+        break;
+      case 'z':
+        axis = atoi(optarg);
+        printf("%d", axis);
+        switch (axis)
+        {
+        case 0:
+          break;
+        case 90:
+          break;
+        case 180:
+          break;
+        case 270:
+          break;
+        default:
+          printf("ZLY ZWROT. {0,90,180,270}");
+          return 1;
+        }
         break;
       case 'c':
         collumns = atoi(optarg);
@@ -49,10 +68,11 @@ int main(int argc, char **argv){
         
         break;
       case 'h':
-          printf("Wywolanie programu:\n./ mrowka[-r wiersze][-c kolumny][-i iteracje][-w ile zapelnienia <0, 100>][-f nazwaPlikuWejsciowego][-o nazwaPlikuWyjsciowego][-h]\nOpcje:\n");
+          printf("Wywolanie programu:\n./ mrowka[-r wiersze][-c kolumny][-i iteracje][-z zwrot][-w ile zapelnienia <0, 100>][-f nazwaPlikuWejsciowego][-o nazwaPlikuWyjsciowego][-h]\nOpcje:\n");
           printf("r - rows / liczba wierszy\n");
           printf("c - columns/ liczba kolumn\n");
           printf("i - iterations/ liczba iteracji\n");
+          printf("z - axis/zwrot poczatkowy mrowki {0, 90, 180, 270}\n");
           printf("f - fileWithMap / nazwa pliku wejsciowego z mapa\n");
           printf("h - help/ wyswietlana pomoc\n");
           printf("w - fillRatio/ wypelnienie planszy\n");
@@ -60,13 +80,13 @@ int main(int argc, char **argv){
           return 0;
         break;
       case '?':
-        printf("Nieznana opcja: %c\t Zajrzyj do help -h\n", optopt);
+        printf("Nieznana opcja: %c. Zajrzyj do help -h\n", optopt);
         break;
       case ':':
-        printf("Brak wartosci do opcji");
+        printf("Brak wartosci do opcji\n");
         break;
       default:
-        fprintf(stderr, "Nie powinnismy tu trafic");
+        fprintf(stderr, "Nie powinnismy tu trafic\n");
     }
   }
   mrowka *mrowka1;
@@ -76,12 +96,12 @@ int main(int argc, char **argv){
     int* dane = wyznaczRozmiar(fname);
     collumns = dane[0];
     rows=dane[1];
-    mrowka1 = stworzMrowke(0,collumns/2,rows/2);
+    mrowka1 = stworzMrowke(axis,collumns/2,rows/2);
     plansza = createMatrix(collumns,rows);
     wczytaj(fname, collumns+2, rows+2, mrowka1, plansza);
   }
   else{
-    mrowka1 = stworzMrowke(0,collumns/2,rows/2);
+    mrowka1 = stworzMrowke(axis,collumns/2,rows/2);
     plansza = createMatrix(collumns,rows);
     if(fillRandom(fillRatio, plansza) == -1)
       return 1;
