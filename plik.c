@@ -6,94 +6,87 @@
 #include "mrowka.h"
 
 int* wyznaczRozmiar(FILE *in){
-    wchar_t buffer[1024];
-    wint_t character;
+    int znak;
     rewind(in);
     int a = 0;
-    int b = 0;
+    int b = 1;
     int* rozmiar = malloc(2*sizeof(int));
-    while(fgetws(buffer, sizeof(buffer) / sizeof(buffer[0]), in) != NULL){
-        for (int i = 0; buffer[i] != L'\0'; ++i) {
-            // Access the current wide character in the buffer
-            character = buffer[i];
-            a++;
-        }
-        b++;
-        memset(buffer, 0, sizeof(buffer));
+    while (znak = fgetc(in) != '\n'){
+        if (znak == '-')
+        a++;
     }
-    rozmiar[0] = a/b - 2;
+    while (znak = fgetc(in) != EOF){
+        if (znak == '\n'){
+            b++;
+        }
+    }
+    rozmiar[0] = a-2;
     rozmiar[1] = b-2;
     return rozmiar;
 }
 
 void wczytaj(FILE *in, int a, int b, mrowka* mrowka1, Matrix *mat){ // a to ilosc rzedow, b to ilosc kolumn wczytywanej planszy (bez obramowania)
     rewind(in);
-    wchar_t buffer[1024];
-    wint_t znak;
+    wchar_t znak;
     for (int i = 0; i < a; i++){
-        memset(buffer, 0, sizeof(buffer));
-        fgetws(buffer, sizeof(buffer) / sizeof(buffer[0]), in);
         for (int j = 0; j < b; j++){
-            for (int pom = 0; buffer[pom] != L'\0'; ++pom) {
-                znak = buffer[pom];
+            znak = fgetwc(in);
+            wprintf(L"%lc", znak);
+            if (znak == " "){
+                    mat->data[i][j] = 0;
             }
-            
-            switch(znak){
-                case ' ':
-                    mat->data[i][j] = 0;
-                    break;
-                case '█':
+            else if (znak == "█"){
                     mat->data[i][j] = 1;
-                    break;
-                case '△':
+            }
+            else if (znak == "△"){
                     mat->data[i][j] = 0;
                     mrowka1->pozX = i;
                     mrowka1->pozY = j;
                     mrowka1->zwrot = 0;
-                    break;
-                case '▲':
+            }
+            else if (znak == "▲"){
                     mat->data[i][j] = 1;
                     mrowka1->pozX = i;
                     mrowka1->pozY = j;
                     mrowka1->zwrot = 0;
-                    break;
-                case '▷':
+            }
+            else if(znak == "▷"){
                     mat->data[i][j] = 0;
                     mrowka1->pozX = i;
                     mrowka1->pozY = j;
                     mrowka1->zwrot = 90;
-                    break;
-                case '▶':
+            }
+            else if (znak == "▶"){
                     mat->data[i][j] = 1;
                     mrowka1->pozX = i;
                     mrowka1->pozY = j;
                     mrowka1->zwrot = 90;
-                    break;
-                case '▽':
+            }
+            else if (znak == "▽"){
                     mat->data[i][j] = 0;
                     mrowka1->pozX = i;
                     mrowka1->pozY = j;
                     mrowka1->zwrot = 180;
-                    break;
-                case '▼':
+            }
+            else if (znak == "▼"){
                     mat->data[i][j] = 1;
                     mrowka1->pozX = i;
                     mrowka1->pozY = j;
                     mrowka1->zwrot = 180;
-                    break;
-                case '◁':
+            }
+            else if (znak == "◁"){
                     mat->data[i][j] = 0;
                     mrowka1->pozX = i;
                     mrowka1->pozY = j;
                     mrowka1->zwrot = 270;
-                    break;
-                case '◀':
+            }
+            else if (znak == "◀"){
                     mat->data[i][j] = 1;
                     mrowka1->pozX = i;
                     mrowka1->pozY = j;
                     mrowka1->zwrot = 270;
-                    break;
-                default:
+            }
+            else{
                     continue;
                 }
             }
@@ -128,7 +121,7 @@ void zapisz(FILE *out, mrowka* mrowka1, Matrix *mat){
                         else if (mat->data[i][j] == 1) fprintf(out,"◀");
                         break;
                 }
-            }
+        }
             else{
             switch(mat->data[i][j]){ //jesli tu nie ma mrowki
                 case 0:
@@ -137,15 +130,14 @@ void zapisz(FILE *out, mrowka* mrowka1, Matrix *mat){
                 case 1:
                     fprintf(out,"█");
                     break;
-                }
             }
-
         }
-        fprintf(out,"│\n");
+    fprintf(out,"│\n");
     }
     fprintf(out,"└");
     for (int k = 0; k < mat->c; k++){
         fprintf(out,"─");
     }
     fprintf(out,"┘");
+}
 }
