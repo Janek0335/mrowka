@@ -18,6 +18,7 @@ int main(int argc, char **argv){
   int iteracji = 5;
   char* outputFile;
   int doFile = 0;
+  int readFile = 0;
   double fillRatio = 0;
   char nazwaPliku[100];
   char *fileWithMap;
@@ -44,6 +45,8 @@ int main(int argc, char **argv){
         break;
       case 'f':
         fileWithMap = optarg;
+        readFile = 1;
+        
         break;
       case 'h':
           printf("Wywolanie programu:\n./ mrowka[-r wiersze][-c kolumny][-i iteracje][-w ile zapelnienia <0, 100>][-f nazwaPlikuWejsciowego][-o nazwaPlikuWyjsciowego][-h]\nOpcje:\n");
@@ -66,43 +69,44 @@ int main(int argc, char **argv){
         fprintf(stderr, "Nie powinnismy tu trafic");
     }
   }
-  fname = fopen(fileWithMap, "r");
-  int* dane = wyznaczRozmiar(fname);
-  collumns = dane[0];
-  rows=dane[1];
-  mrowka *mrowka1 = stworzMrowke(0,collumns/2,rows/2);
-  Matrix *plansza = createMatrix(collumns,rows);
-  fillBlankMatrix(plansza);
-
-  wczytaj(fname, collumns+2, rows+2, mrowka1, plansza);
-  printf("Oryginalna plansza:\n");
-  printToScreen(plansza);
+  mrowka *mrowka1;
+  Matrix *plansza;
+  if(readFile){
+    fname = fopen(fileWithMap, "r");
+    int* dane = wyznaczRozmiar(fname);
+    collumns = dane[0];
+    rows=dane[1];
+    mrowka1 = stworzMrowke(0,collumns/2,rows/2);
+    plansza = createMatrix(collumns,rows);
+    wczytaj(fname, collumns+2, rows+2, mrowka1, plansza);
+  }
+  else{
+    mrowka1 = stworzMrowke(0,collumns/2,rows/2);
+    plansza = createMatrix(collumns,rows);
+    if(fillRandom(fillRatio, plansza) == -1)
+      return 1;
+  }
   
-  
-  
-  /*while (i < iteracji){ //wykonujemy iteracje tak dlugo az zostana wykonane wszystkie lub wyjdziemy za plansze (if czyKoniec to sprawdza)
-    printf("Iteracja numer %d\n",i);
+  while (i < iteracji){ //wykonujemy iteracje tak dlugo az zostana wykonane wszystkie lub wyjdziemy za plansze (if czyKoniec to sprawdza)
     zmienKolor(mrowka1,plansza);
-    printf("Ziterowano mrowke\n");
-    
     normalizacjaKataMrowki(mrowka1);
     ruchDoPrzoduMrowki(mrowka1);
   
     //Zapis do pliku tu dolozyc
     if(doFile){
-      sprintf(nazwaPliku, "%s_%d", outputFile, i);
+      snprintf(nazwaPliku, sizeof (nazwaPliku), "results/%s_%d", outputFile, i);
       fname = fopen(nazwaPliku, "w");
+      zapisz(fname, mrowka1, plansza);
       fclose(fname);
+    }
+    else{
+      zapisz(stdout, mrowka1, plansza);
     }
     i++;
     if (czyKoniec(mrowka1, plansza) == 1){
       break;
     }
-    printf("Konczymy? : %d\n",czyKoniec(mrowka1, plansza));
-  }*/
-  
-  printf("Koncowa plansza:\n");
-  printToScreen(plansza);
+  }
   freeMatrix(plansza);
   freeMrowka(mrowka1);
   return 0;

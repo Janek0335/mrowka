@@ -159,5 +159,5 @@ void zapisz(FILE *out, mrowka* mrowka1, Matrix *mat){
     for (int k = 0; k < mat->c; k++){
         fprintf(out,"─");
     }
-    fprintf(out,"┘");
+    fprintf(out,"┘\n");
 }
