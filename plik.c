@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <wchar.h>
+#include <string.h>
 #include "matrix.h"
 #include "mrowka.h"
 
 int* wyznaczRozmiar(FILE *in){
     int znak;
+    rewind(in);
     int a = 0;
     int b = 1;
     int* rozmiar = malloc(2*sizeof(int));
@@ -22,10 +25,12 @@ int* wyznaczRozmiar(FILE *in){
 }
 
 void wczytaj(FILE *in, int a, int b, mrowka* mrowka1, Matrix *mat){ // a to ilosc rzedow, b to ilosc kolumn wczytywanej planszy (bez obramowania)
-    int znak;
+    rewind(in);
+    wchar_t znak;
     for (int i = 0; i < a; i++){
-        for (int j = 0; i < b; j++){
-            znak = fgetc(in);
+        for (int j = 0; j < b; j++){
+            znak = fgetwc(in);
+            wprintf(L"%lc", znak);
             switch(znak){
                 case ' ':
                     mat->data[i][j] = 0;
@@ -81,7 +86,7 @@ void wczytaj(FILE *in, int a, int b, mrowka* mrowka1, Matrix *mat){ // a to ilos
                     mrowka1->pozY = j;
                     mrowka1->zwrot = 270;
                     break;
-                case EOF:
+                case WEOF:
                     break;
                 default:
                     continue;

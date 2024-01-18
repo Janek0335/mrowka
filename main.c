@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <getopt.h>
+#include <wchar.h>
 #include "matrix.h"
 #include "mrowka.h"
 #include "plik.h"
@@ -64,13 +65,24 @@ int main(int argc, char **argv){
     }
   }
 
-  Matrix *plansza = createMatrix(rows,collumns);
-  fillBlankMatrix(plansza);
+  Matrix *plansza = createMatrix(12,12);
+  //fillBlankMatrix(plansza);
+  fname = fopen(fileWithMap, "r");
+  wchar_t character;
+  while ((character = fgetwc(fname)) != WEOF) {
+        // Process the wide character, e.g., print it
+        wprintf(L"%lc", character);
+    }
+  /*int* dane = wyznaczRozmiar(fname);
+  printf("%dx%d\n", dane[0], dane[1]);*/
+  mrowka *mrowka1 = stworzMrowke(0,collumns/2,rows/2);
+  wczytaj(fname, 12, 12, mrowka1, plansza);
   printf("Oryginalna plansza:\n");
   printToScreen(plansza);
-  mrowka *mrowka1 = stworzMrowke(0,collumns/2,rows/2);
   
-  while (i < iteracji){ //wykonujemy iteracje tak dlugo az zostana wykonane wszystkie lub wyjdziemy za plansze (if czyKoniec to sprawdza)
+  
+  
+  /*while (i < iteracji){ //wykonujemy iteracje tak dlugo az zostana wykonane wszystkie lub wyjdziemy za plansze (if czyKoniec to sprawdza)
     printf("Iteracja numer %d\n",i);
     zmienKolor(mrowka1,plansza);
     printf("Ziterowano mrowke\n");
@@ -89,7 +101,7 @@ int main(int argc, char **argv){
       break;
     }
     printf("Konczymy? : %d\n",czyKoniec(mrowka1, plansza));
-  }
+  }*/
   
   printf("Koncowa plansza:\n");
   printToScreen(plansza);
