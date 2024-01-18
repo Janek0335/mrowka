@@ -13,9 +13,9 @@ int main(int argc, char **argv){
   setlocale(LC_ALL, "C.UTF-8");
   int i = 0;
   int opt;
-  int rows = 5;
-  int collumns = 5;
-  int iteracji = 5;
+  int rows = 10;
+  int collumns = 10;
+  int iteracji = 10;
   char* outputFile;
   int doFile = 0;
   int readFile = 0;
@@ -94,7 +94,7 @@ int main(int argc, char **argv){
   
     //Zapis do pliku tu dolozyc
     if(doFile){
-      snprintf(nazwaPliku, sizeof (nazwaPliku), "results/%s_%d", outputFile, i);
+      snprintf(nazwaPliku, sizeof (nazwaPliku), "results/%s_%d", outputFile, i+1);
       fname = fopen(nazwaPliku, "w");
       zapisz(fname, mrowka1, plansza);
       fclose(fname);
