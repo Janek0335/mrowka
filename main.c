@@ -68,11 +68,13 @@ int main(int argc, char **argv){
   Matrix *plansza = createMatrix(12,12);
   //fillBlankMatrix(plansza);
   fname = fopen(fileWithMap, "r");
-  wchar_t character;
+  wint_t character;
   while ((character = fgetwc(fname)) != WEOF) {
         // Process the wide character, e.g., print it
         wprintf(L"%lc", character);
     }
+  printf("\nChuj\n");
+  return;
   /*int* dane = wyznaczRozmiar(fname);
   printf("%dx%d\n", dane[0], dane[1]);*/
   mrowka *mrowka1 = stworzMrowke(0,collumns/2,rows/2);
