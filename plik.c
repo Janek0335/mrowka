@@ -6,11 +6,13 @@
 #include "mrowka.h"
 
 int* wyznaczRozmiar(FILE *in){
+    wchar_t buffer[1024];
     int znak;
     rewind(in);
     int a = 0;
     int b = 1;
     int* rozmiar = malloc(2*sizeof(int));
+    fgetws(buffer, sizeof(buffer) / sizeof(buffer[0]), in);
     while (znak = fgetc(in) != '\n'){
         a++;
     }
@@ -134,6 +136,7 @@ void zapisz(FILE *out, mrowka* mrowka1, Matrix *mat){
                     break;
                 }
             }
+
         }
         fprintf(out,"│\n");
     }

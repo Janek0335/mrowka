@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <getopt.h>
+#include <locale.h>
 #include <wchar.h>
 #include "matrix.h"
 #include "mrowka.h"
@@ -9,6 +10,7 @@
 
 // zera to biale pola, jedynki to czarne
 int main(int argc, char **argv){
+  setlocale(LC_ALL, "C.UTF-8");
   int i = 0;
   int opt;
   int rows = 5;
@@ -64,20 +66,29 @@ int main(int argc, char **argv){
         fprintf(stderr, "Nie powinnismy tu trafic");
     }
   }
-
-  Matrix *plansza = createMatrix(12,12);
+  mrowka *mrowka1 = stworzMrowke(0,collumns/2,rows/2);
+  Matrix *plansza = createMatrix(collumns,rows);
   //fillBlankMatrix(plansza);
   fname = fopen(fileWithMap, "r");
+  wchar_t buffer[1024];
   wint_t character;
-  while ((character = fgetwc(fname)) != WEOF) {
+  fgetws(buffer, sizeof(buffer) / sizeof(buffer[0]), fname);
+  for (int i = 0; buffer[i] != L'\0'; ++i) {
+        // Access the current wide character in the buffer
+        character = buffer[i];
+        printf("%lc\n", character);
+  }
+  /*while (fgetws(buffer, sizeof(buffer) / sizeof(buffer[0]), fname) != WEOF) {
         // Process the wide character, e.g., print it
-        wprintf(L"%lc", character);
-    }
-  printf("\nChuj\n");
+        
+        printf("%ls", buffer);
+        break;
+  }*/
+  zapisz(stdout, mrowka1, plansza );
   return;
   /*int* dane = wyznaczRozmiar(fname);
   printf("%dx%d\n", dane[0], dane[1]);*/
-  mrowka *mrowka1 = stworzMrowke(0,collumns/2,rows/2);
+  
   wczytaj(fname, 12, 12, mrowka1, plansza);
   printf("Oryginalna plansza:\n");
   printToScreen(plansza);
