@@ -38,16 +38,16 @@ void normalizacjaKataMrowki(mrowka *mrowka1){ //upewnienie sie ze parametr zwrot
 void ruchDoPrzoduMrowki(mrowka *mrowka1){ //wykonanie ruchu mrowki przed siebie (w zaleznosci od tego w ktora strone sie patrzy)
     switch(mrowka1->zwrot){
         case 0:
-            mrowka1->pozY += 1;
+            mrowka1->pozX -= 1;
             break;
         case 90:
-            mrowka1->pozX += 1;
+            mrowka1->pozY += 1;
             break;
         case 180:
-            mrowka1->pozY -= 1;
+            mrowka1->pozX += 1;
             break;
         case 270:
-            mrowka1->pozX -= 1;
+            mrowka1->pozY -= 1;
             break;
     }
 }
