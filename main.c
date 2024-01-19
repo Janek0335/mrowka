@@ -108,11 +108,6 @@ int main(int argc, char **argv){
   }
   
   while (i < iteracji){ //wykonujemy iteracje tak dlugo az zostana wykonane wszystkie lub wyjdziemy za plansze (if czyKoniec to sprawdza)
-    zmienKolor(mrowka1,plansza);
-    normalizacjaKataMrowki(mrowka1);
-    ruchDoPrzoduMrowki(mrowka1);
-  
-    //Zapis do pliku tu dolozyc
     if(doFile){
       snprintf(nazwaPliku, sizeof (nazwaPliku), "results/%s_%d", outputFile, i+1);
       fname = fopen(nazwaPliku, "w");
@@ -122,6 +117,10 @@ int main(int argc, char **argv){
     else{
       zapisz(stdout, mrowka1, plansza);
     }
+    zmienKolor(mrowka1,plansza);
+    normalizacjaKataMrowki(mrowka1);
+    ruchDoPrzoduMrowki(mrowka1);  
+    
     i++;
     if (czyKoniec(mrowka1, plansza) == 1){
       break;
